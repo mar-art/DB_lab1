@@ -14,8 +14,8 @@ GROUP BY region
 ORDER BY PERC DESC;
 
 --запит 3 - вивести динаміку змін цін по місяцях.
-SELECT avgprice, month
-FROM Prices
-JOIN Months 
-ON Prices.id=Months.id
+SELECT month, avg(avgprice)
+FROM Months 
+JOIN Prices
+ON Months.id = Prices.id
 GROUP BY month;
