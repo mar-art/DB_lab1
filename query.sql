@@ -1,20 +1,21 @@
-SELECT region, MAX(averageprice)
-FROM Avocado
-JOIN Regions ON Avocado.region = Regions.region
-JOIN Prices ON Avocado.averageprice = Prices.averageprice
-GROUP BY Avocado.region
+--вивести регіон та найвищу ціну, що була в цьому регіоні.
+select max(avgprice), region
+from Prices
+INNER JoIN Regions on
+Regions.id = Prices.id
+GROUP BY regions.region;
 --запит 2 - Вивести регіон та % отриманих даних про авокадо з цього регіону відносно решти регіонів.
-SELECT Avocado.region, 
+SELECT region, 
  round( COUNT(*) * 100 / ( SELECT COUNT(*) FROM Regions ), 2 ) as PERC
 FROM Avocado
 JOIN Regions 
-ON Avocado.region=Regions.region
+ON Avocado.id=Regions.id
 GROUP BY region
-ORDER BY PERC DESC
+ORDER BY PERC DESC;
 
 --запит 3 - вивести динаміку змін цін по місяцях.
-SELECT averageprice, month
-FROM Avocado
+SELECT avgprice, month
+FROM Prices
 JOIN Months 
-ON Avocado.month=Months.month
-GROUP BY month
+ON Prices.id=Months.id
+GROUP BY month;
